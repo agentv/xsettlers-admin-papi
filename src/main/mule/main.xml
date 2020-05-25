@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="getDictionary" doc:id="1991f25a-c6c7-4ff6-988e-586ea28628b6" >
+		<http:request method="GET" doc:name="Request" doc:id="b3e856f7-ffd0-444e-8242-881b10566790" config-ref="Object_SAPI_Request_configuration" path="/object"/>
+	</flow>
+</mule>

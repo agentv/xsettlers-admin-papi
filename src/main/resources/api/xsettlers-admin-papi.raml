@@ -1,0 +1,64 @@
+#%RAML 1.0
+title: XSettlers Admin PAPI
+version: 0.5.0
+
+/dictionary:
+  description: the set of all objects in the game
+  get:
+    description: retrieve the collection of all objects
+    queryParameters:
+      object-type:
+        required: false
+        type: string
+    responses:
+      200:
+        body:
+          application/json:
+
+/game:
+  description: One instance of the XSettlers game
+  get:
+    description: initialize a specific game
+    queryParameters:
+      model:
+        description: one specific form of the game
+        required: false
+        enum:
+          - scrabble
+          - scrabble-cube
+          - autopilot
+  /board:
+    description: the resources associated with one game
+    post:
+      displayName: Initialize a new gameboard
+      description: put a new gameboard into the Object Store
+      body:
+        application/json:
+          description: elements of the gameboard that should be used for initialization
+    /{ID}:
+      description: one gameboard identified by the key ID
+      get:
+      put:
+      delete:
+
+  /master:
+    description: administrative entity responsible for game operation, also holds master data view
+    get:
+      description: initialize a game master
+
+  /player:
+    description: one actor in the game
+    /{ID}:
+      description: specific player identified by ID
+      get:
+      delete:
+      put:
+
+/util:
+  /jobqueue:
+    description: a list of tasks expected to occur at specific time
+
+  /job:
+    description: a specific state change to game board, player, or both
+      
+

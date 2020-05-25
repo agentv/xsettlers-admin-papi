@@ -1,0 +1,9 @@
+http:
+  port: "28083"
+
+api:
+  object-host: "localhost"
+  object-port: "28081"  
+  game-host: "localhost"
+  game-port: "28082"
+

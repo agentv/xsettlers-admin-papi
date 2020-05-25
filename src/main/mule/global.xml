@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="29458ec7-99d3-49ed-8fa3-76ff893dcf1d" file="dev-config.yaml" />
+    <http:listener-config name="xsettlers-admin-papi-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${http.port}" />
+    </http:listener-config>
+	<http:request-config name="Game_PAPI_Request_configuration" doc:name="HTTP Request configuration" doc:id="923b1da6-41f7-4ff7-a0c6-7e3dd7614898" >
+		<http:request-connection host="${api.game-host}" port="${api.game-port}" />
+	</http:request-config>
+	<http:request-config name="Object_SAPI_Request_configuration" doc:name="HTTP Request configuration" doc:id="9d45cc39-3bb9-484e-9b6e-a2a5bda6a77b" basePath="/api">
+		<http:request-connection host="${api.object-host}" port="${api.object-port}" />
+	</http:request-config>
+
+</mule>

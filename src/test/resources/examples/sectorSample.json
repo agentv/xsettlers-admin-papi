@@ -1,0 +1,38 @@
+[
+	{
+	  "location": {
+	    "xCoord": 0,
+	    "yCoord": 0,
+	    "zCoord": 0
+	  },
+		"energy": 293.0,
+		"farm": 167.0,
+		"factory": 197.0,
+		"portRegistry": [],
+		"colonyRegistry": []
+	},
+	{
+	  "location": {
+	    "xCoord": 0,
+	    "yCoord": 1,
+	    "zCoord": 0
+	  },
+		"energy": 273.0,
+		"farm": 166.0,
+		"factory": 184.0,
+		"portRegistry": [],
+		"colonyRegistry": []
+	}, 
+	{
+	  "location": {
+	    "xCoord": 0,
+	    "yCoord": 2,
+	    "zCoord": 0
+	  },
+		"energy": 263.0,
+		"farm": 167.0,
+		"factory": 144.0,
+		"portRegistry": [],
+		"colonyRegistry": []
+	}
+]

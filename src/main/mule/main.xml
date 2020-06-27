@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="getDictionary" doc:id="1991f25a-c6c7-4ff6-988e-586ea28628b6" >
 		<http:request method="GET" doc:name="Request" doc:id="b3e856f7-ffd0-444e-8242-881b10566790" config-ref="Object_SAPI_Request_configuration" path="/object"/>
+	</flow>
+	<flow name="makeDistrict" doc:id="ac445bf6-12b1-4dd8-b6cb-ab7f6f1423d7" doc:description='This flow triggers the logic that creates a 16^3 cube of sectors
+intial stage will be completely empty
+plan is to organically "discover" the contents and activities'>
+		<logger level="INFO" doc:name="Logger" doc:id="91f4db61-af97-43c4-922e-f2476b4976bb" message='Ready to create a logical "district" It will consist of 3 dimensional array 16 sectors to a side'/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="1f122b9e-7bc2-4257-957b-ecd301b6db91" />
+	</flow>
+	<flow name="makeRegion" doc:id="ae6b4f4c-5d93-484a-b972-502aaa8052f8" doc:description='This flow should produce a "region" - in other words, a cube measuring 16 sectors along each axis'>
+		<ee:transform doc:name="sample sector" doc:id="a43b3aff-8ddf-49ac-9e37-32d1c0dbb2ff" >
+			<ee:message >
+				<ee:set-payload resource="sectorModel.dwl" />
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="sampleSector" resource="sectorModel.dwl" />
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="d2f2cb4c-97cd-4853-9f90-c4cd58afd70e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+// break this up - needs one thing to create sector,
+// one thing to create, "platter" and one to assemble
+// it all into a region
+---
+{
+	location: {(
+		stuff: payload.farm
+//		xCoord: payload.location.xCoord
+//		yCoord: payload.location.yCoord,
+//		zCoord: payload.location.zCoord,
+	)}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 	</flow>
 </mule>

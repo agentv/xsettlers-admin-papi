@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 intial stage will be completely empty
 plan is to organically "discover" the contents and activities'>
 		<logger level="INFO" doc:name="Logger" doc:id="91f4db61-af97-43c4-922e-f2476b4976bb" message='Ready to create a logical "district" It will consist of 3 dimensional array 16 sectors to a side'/>
-		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="1f122b9e-7bc2-4257-957b-ecd301b6db91" />
+		<set-payload value='#["Sample District"]' doc:name="Set Payload" doc:id="1f122b9e-7bc2-4257-957b-ecd301b6db91" />
 	</flow>
 	<flow name="makeRegion" doc:id="ae6b4f4c-5d93-484a-b972-502aaa8052f8" doc:description='This flow should produce a "region" - in other words, a cube measuring 16 sectors along each axis'>
 		<ee:transform doc:name="sample sector" doc:id="a43b3aff-8ddf-49ac-9e37-32d1c0dbb2ff" >

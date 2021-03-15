@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Author a Note</title>
+</head>
+
+<body>
+	<h1>Author a Note</h1>
+
+	<p>Enter the details of your note here. All the fields are required.</p>
+	<form id="newmessageform" method="post" enctype="application/x-www-form-urlencoded">
+		<label for="headline">Headline</label>
+			<input type="text" id="headline" name="headline" width="48" /> <br /> <br />
+		<label for="message">Enter your message here...</label> <br />
+			<textarea id="message" name="message" rows="6" cols="48"></textarea>
+		<input name="owner" type="hidden" value="Bob" />
+		<input id="timestamp" name="timestamp" type="hidden" />
+		
+		<br /> <input type="submit" />
+	</form>
+	
+	<script type="text/javascript">	
+		var endpoint = "http://localhost:28082/api/note";
+		document.getElementById("newmessageform").setAttribute("action",endpoint)
+		
+		var now = new Date();
+		document.getElementById("timestamp").setAttribute("value", now.toISOString());
+		
+	</script>
+
+</body>
+</html>

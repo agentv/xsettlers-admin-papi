@@ -28,7 +28,7 @@ page]]></ee:set-payload>
 		<logger level="INFO" doc:name="Logger" doc:id="c82e7eea-6523-45fc-b234-a398bec4d94a" message="#[payload]"/>
 	</flow>
 	<flow name="xsettlers-admin-input-html" doc:id="aa47f0f9-2aea-4bd5-b72e-14fb62a7f473" >
-		<http:listener doc:name="GET /test/noteinput" doc:id="67fb8d5b-df65-4ccf-b1c5-6918c13b19d7" config-ref="xsettlers-admin-papi-httpListenerConfig" path="/test/noteinput" allowedMethods="GET" doc:description="This stub merely tests the approach to delivery of HTML content&#10;So far, we haven't got it all the way yet.&#10;not yet either...">
+		<http:listener doc:name="GET /test/noteinput" doc:id="67fb8d5b-df65-4ccf-b1c5-6918c13b19d7" config-ref="xsettlers-admin-papi-httpListenerConfig" path="/test/noteinput" allowedMethods="GET" doc:description="This stub merely tests the approach to delivery of HTML content&#10;So far, we haven't got it all the way yet.&#10;not yet either...&#10;&#10;Okay - seems the secret is to have the HTML listener present a &#10;Content-Type header">
 			<http:response>
 				<http:headers ><![CDATA[#[output application/java
 ---

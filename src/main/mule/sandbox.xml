@@ -5,6 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="seeSectors" doc:id="12007bc6-db34-41e1-9829-f5e35f2db825" >
+		<logger level="INFO" doc:name="README" doc:id="b965dce6-1804-47aa-a25d-d55866367e33" doc:description="This flow is incompatible with going to Cloudhub&#10;If it is to survive, it should be rewritten to use the Object Store"/>
 		<ee:transform doc:name="Examine Sectors" doc:id="32f8a38c-540a-46ed-b941-6832f0f5e3e4" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0

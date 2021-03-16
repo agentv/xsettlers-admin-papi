@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="xsettlers-admin-testFlow" doc:id="aa47f0f9-2aea-4bd5-b72e-14fb62a7f473" >
+		<http:listener doc:name="GET /test/noteinput" doc:id="67fb8d5b-df65-4ccf-b1c5-6918c13b19d7" config-ref="xsettlers-admin-papi-httpListenerConfig" path="/test/noteinput" allowedMethods="GET" doc:description="This stub merely tests the approach to delivery of HTML content&#10;So far, we haven't got it all the way yet.&#10;not yet either...">
+			<http:response>
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "text/html"
+}]]]></http:headers>
+			</http:response>
+		</http:listener>
+		<ee:transform doc:name="show HTML input form" doc:id="016dfb1a-303b-4f34-a0e3-ee034dea1111" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output text/plain
+
+var page = readUrl("classpath://html/newmessage.html","text/plain")
+---
+page]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="85674800-c9b2-4c89-85a3-ac7a9debfbb9" message="#[payload]"/>
+	</flow>
+</mule>

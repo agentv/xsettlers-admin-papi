@@ -1,4 +1,4 @@
-# xsettlers-admin-papi
+# xsettlers-admin-papi v0.1.0
 
 _API for administrative functions in the **Xsettlers** game_
 

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Author a Note</title>
+	
+	
+<script>
+	
+	/**
+	 * Helper function for POSTing data as JSON with fetch.
+	 *
+	 * @param {Object} options
+	 * @param {string} options.url - URL to POST data to
+	 * @param {FormData} options.formData - `FormData` instance
+	 * @return {Object} - Response body from URL that was POSTed to
+	 */
+	async function postFormDataAsJson({ url, formData }) {
+		const plainFormData = Object.fromEntries(formData.entries());
+		const formDataJsonString = JSON.stringify(plainFormData);
+
+		const fetchOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: formDataJsonString,
+		};
+
+		const response = await fetch(url, fetchOptions);
+
+		if (!response.ok) {
+			const errorMessage = await response.text();
+			throw new Error(errorMessage);
+		}
+
+		return response.json();
+	}
+
+	/**
+	 * Event handler for a form submit event.
+	 *
+	 * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
+	 *
+	 * @param {SubmitEvent} event
+	 */
+	async function handleFormSubmit(event) {
+		event.preventDefault();
+
+		const form = event.currentTarget;
+		const url = form.action;
+
+		try {
+			const formData = new FormData(form);
+			const responseData = await postFormDataAsJson({ url, formData });
+
+			console.log({ responseData });
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	
+</script>
+
+</head>
+
+<body>
+	<h1>Author a Note</h1>
+
+	<p>Enter the details of your note here. All the fields are required.</p>
+	<form id="newmessageform" method="post" enctype="application/json">
+		<label for="headline">Headline
+			<input type="text" width="68" id="headline" name="headline" />
+		</label> <br /> <br />
+		<label for="message">Enter your message here...
+			<input type="text" id="message" name="message" width="68" />
+		</label> <br />
+		<input name="owner" type="hidden" value="Bob" />
+		<input name="timestamp" id="timestamp" type="hidden" />
+		
+		<br /> <input type="submit" id="submit" name="submit" />
+	</form>
+	
+	<script type="text/javascript">	
+		window.onload = function() {
+			const endpoint = "http://localhost:28082/api/note";
+			document.getElementById("newmessageform").setAttribute("action",endpoint);
+			const exampleForm = document.getElementById("newmessageform");
+			exampleForm.addEventListener("submit", handleFormSubmit);
+
+			var now = new Date();
+			document.getElementById("timestamp").setAttribute("value", now.toISOString());		
+		};
+		
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
